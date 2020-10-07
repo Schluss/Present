@@ -2,9 +2,6 @@
 
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-//const passportLocalMongoose = require('passport-local-mongoose');
-//const bcrypt = require('bcrypt');
-
 const password = require('../utils/password');
 
 const Organization = new Schema({
@@ -70,24 +67,6 @@ Organization.pre('save', async function (next) {
 		
 		next();
 		
-		/*
-        bcrypt.genSalt(10, function (err, salt) {
-			
-            if (err)
-                return next(err);
-            
-			
-            bcrypt.hash(user.password, salt, function (err, hash) {
-				
-                if (err)
-					return next(err);
-                
-                user.password = hash;
-
-                next();
-            });
-        });
-		*/
     } else {
         return next();
     }
@@ -96,20 +75,7 @@ Organization.pre('save', async function (next) {
 Organization.methods.comparePassword = async function (passw) {
 	
 	return await password.compare(passw, this.salt, this.hash);
-	/*
-    bcrypt.compare(passw, this.password, function (err, isMatch) {
-        if (err) {
-            return cb(err);
-        }
-        cb(null, isMatch);
-    });*/
-};	
 
-/*	
-Organization.plugin(passportLocalMongoose, {
-	usernameField : 'email',
-	selectFields : '_id' 		// only this field is stored in a sessio after authentication
-	});
-*/
+};	
 
 module.exports = mongoose.model('Organization', Organization);
