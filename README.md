@@ -2,9 +2,16 @@
 
 ## Setup
 
+Required:
+- NodeJS
+- MongoDB
+
 ### Install
 
-> npm run install
+> npm install
+
+### .ENV file
+View, modify and rename .env.example to .env
 
 ### MongoDB
 Setup a Mongo DB instance and create credentials including a certificate to be able to connect to the db
