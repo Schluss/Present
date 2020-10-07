@@ -1,0 +1,11 @@
+{
+  "node": true,
+  "esversion": 8,
+  "browser": false,
+  "devel": false,
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "jquery":true,
+  "asi" : true
+}

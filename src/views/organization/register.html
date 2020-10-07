@@ -1,0 +1,71 @@
+{{> header }}
+
+<div class="container">
+
+<div class="row">
+	<div class="center col-12">
+	<h1>Registreren</h1>
+	<p>Registreer je organisatie snel en makkelijk zodat je meteen aan de slag kunt</p>
+	</div>
+</div>
+
+<div class="row center">
+	<div class="col-2"></div>
+    <div class="col-8 center">
+
+
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+
+        <form method="POST" action="">
+		<input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+
+		<div class="form-group">
+		<label for="name" class="required">Bedrijfsnaam</label>
+		<input name="name" type="text" class="form-control" id="name" value="{{org.name}}">
+		</div>
+
+		<div class="form-group">
+            <label for="kvk" class="required">KVK nummer</label>
+            <input name="kvk" type="text" class="form-control" id="kvk" value="{{org.kvk}}">
+        </div>   
+    
+        <div class="form-group">
+			<label for="address" class="required">Adres</label>
+            <input name="address" type="text" class="form-control" id="address" value="{{org.address}}">
+        </div>
+            
+        <div class="form-group">
+			<label for="emailInput" class="required">E-mail adres</label>
+            <input name="email" type="email" class="form-control" id="emailInput" placeholder="" value="{{org.email}}">
+        </div>
+
+        <div class="form-group">
+			<label for="passwordInput" class="required">Wachtwoord</label>
+            <input name="password" type="password" class="form-control" id="passwordInput" placeholder="">
+        </div>
+
+            
+		<div class="form-group">
+			<label for="confirmPasswordInput" class="required">Herhaal wachtwoord</label>
+            <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" placeholder="">
+        </div>   
+
+
+		<div class="center">
+			<button type="submit" class="btn btn-primary">Registreer</button>
+		</div>
+		
+        </form>
+		
+		<br/>
+		<br/>
+		<p>Heb je al een account? <a href="/">Log dan hier in</a></p>		
+    </div>
+	<div class="col-2"></div>
+</div>
+</div>

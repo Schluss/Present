@@ -1,0 +1,19 @@
+<div class="header">
+	<div class="container small">
+		<div class="row">
+			{{#if org.name}}
+			<div class="logo">
+				<img src="/img/logo.svg" class="" alt="logo"/>
+			</div>			
+			
+			<div class="location floatright">
+				<img src="/img/marker.svg" alt="location"/> {{org.name}}
+			</div>
+			{{ else }}
+			<div class="center">
+				<img src="/img/logo.svg" class="" alt="logo"/>
+			</div>
+			{{/if}}
+		</div>
+	</div>
+</div>

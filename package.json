@@ -1,0 +1,45 @@
+{
+  "name": "present",
+  "title": "",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Bob Hageman <bob@schluss.org>",
+  "license": "BSD 3 License",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "https://www.schluss.org",
+  "private": true,
+  "scripts": {
+    "installkeys": "node -e \"require('./installkeys').run()\"",
+    "installadmin": "node -e \"require('./installadmin').run()\"",
+    "jshint": "jshint ./src/",
+    "servelocal": "npx nodemon -r dotenv/config --watch src --inspect ./src/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "express-minify-html-2": "^1.0.1",
+    "express-mongo-sanitize": "^2.0.0",
+    "express-session": "^1.17.1",
+    "helmet": "^4.1.1",
+    "lowdb": "^1.0.0",
+    "mongoose": "^5.10.7",
+    "nedb": "^1.8.0",
+    "openpgp": "^4.10.8",
+    "qr-image": "^3.2.0",
+    "scmp": "^2.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.12.0"
+  }
+}

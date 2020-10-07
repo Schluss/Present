@@ -1,0 +1,33 @@
+{{> header }}
+
+<div class="container">
+
+<div class="row">
+	<div class="center col-12">
+	<h1>{{ org.name }}</h1>
+	<p>Aantal registraties vandaag: {{registrationCount}}</p>
+	</div>
+</div>
+
+<div class="row center">
+	<div class="col-2"></div>
+    <div class="col-8 center">
+
+
+
+
+
+
+
+
+<p><a href="/account/manual-check-in">[+] Handmatige invoer</a></p>
+<p><a href="/check-in/{{org._id}}">[debug] Invoer voorkant</a></p>
+<p><a href="/account/download-qr">QR code downloaden</a></p>
+
+<p><a href="/account/mijn-gegevens">Mijn gegevens</a></p>
+<p><a href="/loguit">Uitloggen</a></p>
+
+	</div>
+	<div class="col-2"></div>
+</div>
+</div>

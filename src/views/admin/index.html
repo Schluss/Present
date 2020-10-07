@@ -1,0 +1,50 @@
+{{> header }}
+
+<div class="container">
+
+<div class="row">
+	<div class="center col-12">
+	<h1>Admin</h1>
+	<p>Aantal registraties vandaag: {{registrationCount}}</p>
+	</div>
+</div>
+
+<div class="row center">
+	<div class="col-2"></div>
+    <div class="col-8 center">
+
+<!--
+		<div class="row left">
+			<div class="col-8"><b>Organisatie</b></div>
+			<div class="col-4">asd</div>
+		</div>
+
+
+		<div class="row left">
+			<div class="col-8">{{name}}</div>
+			<div class="col-4"></div>
+		</div>
+-->
+
+<table width="100%">
+ <tr>
+  <th>Organisatie</th>
+  <th></th>
+ </tr>
+		{{#each orgs}}
+ <tr>
+  <td><a href="">{{name}}</a></td>
+  <td><a href="">download registraties</a></td>
+ </tr>
+		{{/each}}
+</table>
+
+<br/>
+
+		<p><a href="/admin/mijn-gegevens">Mijn gegevens</a></p>
+		<p><a href="/admin/loguit">Uitloggen</a></p>
+
+	</div>
+	<div class="col-2"></div>
+</div>
+</div>

@@ -1,0 +1,41 @@
+{{> header }}
+
+<div class="container  ">
+
+<div class="row">
+	<div class="center col-12">
+	<h1>Inloggen</h1>
+	<p>Log in als organisatie</p>
+	</div>
+</div>
+
+<div class="row center">
+	<div class="col-3"></div>
+    <div class="col-6 center">
+
+        {{#if message}}
+            <div class="alert {{messageClass}}" role="alert">
+                {{message}}
+            </div>
+        {{/if}}
+
+        <form method="post" action="">
+		<input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="required">E-mail adres</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="" value="{{email}}">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="required">Wachtwoord</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>		
+        </form>
+		
+		<br/>
+		<br/>
+		<p>Nog geen account? <a href="/registreer">Registreer eenvoudig en snel</a></p>
+    </div>
+	<div class="col-3"></div>
+</div>
+</div>
