@@ -1,5 +1,19 @@
 # Present
 
+### .ENV file
+View, modify and rename .env.example to .env
+
+## Run via Docker
+
+Build the image
+> docker build -t <imagename> .
+
+To see your image listed:
+> docker images
+
+Run the image
+> docker run -p 8080:8080 --env-file=.env <imagename>
+
 ## Setup
 
 Required:
@@ -10,8 +24,7 @@ Required:
 
 > npm install
 
-### .ENV file
-View, modify and rename .env.example to .env
+
 
 ### MongoDB
 Setup a Mongo DB instance and create credentials including a certificate to be able to connect to the db
