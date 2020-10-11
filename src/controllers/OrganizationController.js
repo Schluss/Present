@@ -6,6 +6,7 @@ const RegisterController = require('./RegisterController');
 const PubKeyModel = require('../models/PubKey');
 const RegisterModel = require('../models/Registration');
 const csrf = require('csurf');
+const pdf = require('html-pdf');
 
 const formatError = errors => {
 	let message = '';
