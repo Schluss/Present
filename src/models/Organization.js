@@ -73,9 +73,7 @@ Organization.pre('save', async function (next) {
 });
 
 Organization.methods.comparePassword = async function (passw) {
-	
-	return await password.compare(passw, this.salt, this.hash);
-
+	return password.compare(passw, this.salt, this.hash);
 };	
 
 module.exports = mongoose.model('Organization', Organization);

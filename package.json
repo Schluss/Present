@@ -30,11 +30,9 @@
     "express-mongo-sanitize": "^2.0.0",
     "express-session": "^1.17.1",
     "helmet": "^4.1.1",
-    "lowdb": "^1.0.0",
     "mongoose": "^5.10.7",
-    "nedb": "^1.8.0",
     "openpgp": "^4.10.8",
-    "qr-image": "^3.2.0",
+    "pdfmake": "^0.1.68",
     "scmp": "^2.1.0"
   },
   "devDependencies": {

@@ -80,7 +80,7 @@ const app = express();
 				secret	: process.env.SESSION_SECRET, 
 				name 	: process.env.SESSION_NAME,
 				resave	: false, 
-				saveUninitialized: false,
+				saveUninitialized: true,		// when this is false, sometimes you need to login multiple times...
 				cookie : { 
 					// https requirement for cookies always in production
 					secure 	: process.env.NODE_ENV == 'production' ? true : false, 			
@@ -91,7 +91,7 @@ const app = express();
 				// store sessions in db
 				store: new MongoStore({ 
 					mongooseConnection: db.connection(),
-					//secret: 'mySecret'
+					secret: process.env.SESSION_SECRET,
 				})
 			}));
 				
