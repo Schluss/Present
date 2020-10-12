@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const mongoose = require('mongoose');
-const certFile = fs.readFileSync(process.env.DB_CERTIFICATE);
+const certString = process.env.DB_CERTIFICATE;
 
 module.exports = {
 	
@@ -13,7 +13,7 @@ module.exports = {
 		  useUnifiedTopology: true,
 		  useFindAndModify: false,
 		  useCreateIndex: true,
-		  sslCA: certFile,
+		  sslCA: certString,
 		  sslValidate: true 
 		});
 	},
