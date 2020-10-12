@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="37" viewBox="0 0 34 37">
+    <g fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g stroke-width="1.5">
+            <g>
+                <g>
+                    <path stroke="#FA4A69" stroke-linejoin="round" d="M4.042 15.298v1.1c0 .308.25.559.559.559h1.1" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                    <path stroke="#FA4A69" d="M6.669 11.116L13.945 11.116" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                    <path stroke="#FA4A69" stroke-linejoin="round" d="M5.7 5.625H4.6c-.308 0-.558.25-.558.558v1.1M16.168 7.283v-1.1c0-.308-.25-.558-.558-.558h-1.1M14.51 16.957h1.1c.308 0 .558-.25.558-.559v-1.1" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                    <g stroke="#7C859A" stroke-linejoin="round">
+                        <path d="M16.039 25.877L.194 25.877M10.003 28.518h0c.208 0 .377.17.377.378h0c0 .208-.169.377-.377.377h0c-.208 0-.377-.17-.377-.377h0c0-.209.169-.378.377-.378" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                        <path d="M16.794 31.914H3.212c-1.667 0-3.018-1.352-3.018-3.018V3.242C.194 1.575 1.545.224 3.212.224h13.582c1.666 0 3.018 1.35 3.018 3.018V19.5" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                        <path d="M31.884 34.926l-4.527-6.63v-8.634c0-3.21-5.221-5.886-7.545-7.666" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                        <path fill="#FFF" d="M22.83 21.92l-5.624-4.508c-.785-.785-2.057-.785-2.842 0-.785.784-.785 2.057 0 2.841l5.448 6.156v3.858c0 1.82 2.601 4.695 2.601 4.695" transform="translate(-553 -482) translate(524 466) translate(30 17)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -30,11 +30,29 @@ const Organization = new Schema({
 			unique: true
 		},
 
-		address : { 
+		streetname : { 
 			type: String,
-			required: [true, 'Adres'],
+			required: [true, 'Straatnaam'],
+			trim: true
+		},	
+
+		housenumber : { 
+			type: String,
+			required: [true, 'Huisnummer'],
+			trim: true
+		},	
+
+		postal : { 
+			type: String,
+			required: [true, 'Postcode'],
 			trim: true
 		},		
+		
+		city : { 
+			type: String,
+			required: [true, 'Plaats'],
+			trim: true
+		},
 		
 		email: {
 			type: String,

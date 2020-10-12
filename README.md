@@ -91,6 +91,8 @@ To fire up the development webserver run:
 - secure way of private key distribution to organization (will be probably offline)
 - commandline tool / script to get registrations
 - totp (2 factor auth) at organization login
+- organization: change password
+- organization: reset forgotten password -> mailservices needed 
 
 Postponed:
 - admin portal

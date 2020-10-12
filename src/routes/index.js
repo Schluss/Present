@@ -11,6 +11,7 @@ router.use('/', require('./register'));
 // default route: when no route matches
 router.get('*', function (req, res) {
     res.render('notfound', {
+		layout : 'error', 
 		title : 'Niet gevonden'
 	});
 });
@@ -19,7 +20,7 @@ router.get('*', function (req, res) {
 router.use(function(err, req, res, next){
 	res.status(500);
 	res.render('error', { 
-		layout : 'main', 
+		layout : 'error', 
 		error : err 
 	});	
 });

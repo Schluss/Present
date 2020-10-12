@@ -71,32 +71,57 @@ const OrganizationController = {
 	processMijnGegevens : async (req, res, next) => {
 	
 		try {
+			
+			let returnInvalid = (message, org) =>	{
+				res.message(message);
+				
+				res.render('organization/mijn-gegevens', {
+					layout : 'main',
+					title : "Mijn gegevens",
+					org : org.toJSON(),
+					csrfToken : req.csrfToken()
+				});
+			}			
 	
 			// fill the model
 			let org = await Organization.findById(req.session.user._id);
 
 			// update fields
 			org.kvk = req.body.kvk;
-			org.address = req.body.address;
 			org.name = req.body.name;
+			org.streetname = req.body.streetname;
+			org.housenumber = req.body.housenumber;
+			org.postal = req.body.postal;
+			org.city = req.body.city;
+			org.phone = req.body.phone;
 			org.email = req.body.email; 
-						
+													
 			// validate the model
-			let error = org.validateSync();
+			let errors = org.validateSync();
 			
-			if (error){
-				res.message(error);
+			if (errors)
+				return returnInvalid('Niet alle verplichte velden zijn ingevuld: ' + formatError(errors), org);
+
+			// compare password and retyped password
+			if (req.body.password != ''){
 				
-				return res.render('organization/mijn-gegevens', {
-					layout : 'main',
-					organization : org.toJSON(),
-					csrfToken : req.csrfToken()
-				});
-			}
+				if (req.body.password != req.body.confirmPassword)
+					return returnInvalid('Wachtwoord komt niet overeen.', org);
 			
+				// update the password
+				org.hash = req.body.password;
+			}			
+				
+			// save changes
 			let result = await org.save();
 			
-			res.message('Wijzigingen opgeslagen');
+			if (!result)
+				return returnInvalid('Wijzigingen konden niet worden opgeslagen. Probeer het opnieuw en neem contact met ons op als het probleem zich voor blijft doen', org);
+			
+			// update session data
+			req.session.user.name = org.name;
+			
+			res.message('Wijzigingen opgeslagen', 'ok');
 			
 			return res.redirect('/account/mijn-gegevens');
 		}
@@ -109,7 +134,7 @@ const OrganizationController = {
 		try {
 		
 			let org = await Organization.findById(req.session.user._id);
-			
+
 			if (!org)
 				throw('Organisatie niet gevonden');
 			
@@ -118,10 +143,15 @@ const OrganizationController = {
 			if (!pubkey)
 				throw('Organisatie niet gevonden');
 
+			var date = new Date();
+
 			res.render('organization/manual-check-in', {
 				layout : 'main',
 				csrfToken : req.csrfToken(),
 				org : org.toJSON(),
+				title : "Handmatige check-in",
+				checkinDate : date.getFullYear() + '-' + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2),
+				checkinTime : date.getHours() + ':' + date.getMinutes(),
 				pubkey : pubkey.toJSON()
 				});
 			
@@ -135,10 +165,13 @@ const OrganizationController = {
 		
 		try {
 
+			let checkinDate = Date(req.body.checkinDate + ' ' + req.body.checkinTime);
+
 			// fill the model
 			let reg = new RegisterModel({
 				organization : req.session.user._id,
-				data : req.body.data
+				data : req.body.data,
+				checkinDate : checkinDate
 				});
 			
 			// validate the model
@@ -149,6 +182,8 @@ const OrganizationController = {
 				res.message(error);
 				return res.redirect('/');
 			}
+			
+			console.log(reg);
 			
 			let result = await reg.save();
 			
@@ -175,6 +210,7 @@ const OrganizationController = {
 		
 		res.render('organization/register', {
 			layout : 'main',
+			title : "Registreren",
 			csrfToken : req.csrfToken()
 		});
 	},
@@ -182,12 +218,26 @@ const OrganizationController = {
 	processRegistration : async (req, res, next) => {
 		
 		try {
-		
+			
+			let returnInvalid = (message, org) =>	{
+				res.message(message);
+				
+				res.render('organization/register', {
+					layout : 'main',
+					org : org.toJSON(),
+					title : "Registreren",
+					csrfToken : req.csrfToken()
+				});
+			}			
+				
 			// fill the model
 			let org = new Organization({
 				kvk : req.body.kvk,
-				address : req.body.address,
 				name : req.body.name,
+				streetname : req.body.streetname,
+				housenumber : req.body.housenumber,
+				postal : req.body.postal,
+				city : req.body.city,
 				email : req.body.email,
 				hash : req.body.password
 				});
@@ -195,15 +245,18 @@ const OrganizationController = {
 			// validate the model
 			let errors = org.validateSync();
 					
-			if (errors){
-				res.message('Niet alle verplichte velden ingevuld: ' + formatError(errors));
-				
-				return res.render('organization/register', {
-					layout : 'main',
-					org : org.toJSON(),
-					csrfToken : req.csrfToken()
-				});
-			}
+			if (errors)
+				return returnInvalid('Niet alle verplichte velden zijn ingevuld: ' + formatError(errors), org);
+
+			// check if e-mail already exists
+			let tmpOrg = await Organization.findOne({ email : req.body.email});
+			
+			if (tmpOrg)
+				return returnInvalid('Het opgegeven e-mail adres bestaat al in ons systeem.', org);
+
+			// compare password and retyped password
+			if (req.body.password != req.body.confirmPassword)
+				return returnInvalid('Wachtwoord komt niet overeen.', org);
 			
 			// make a ref to the first available key at the organization
 			let nextKey = await PubKeyController.findNext();
@@ -212,7 +265,7 @@ const OrganizationController = {
 			let result = await org.save();
 			
 			if (result){
-				res.message('Geregisteerd!');
+				res.message('Je bent geregistreerd en kan nu inloggen', 'ok');
 				return res.redirect('/');
 			}
 		}
@@ -231,30 +284,34 @@ const OrganizationController = {
 			
 		res.render('organization/login', {
 			layout : 'main',
+			title : "Inloggen",
 			csrfToken : req.csrfToken()
 		});
 	},
 
 	processLogin : async (req, res, next) => {
 
-		let returnInvalid = () =>	{
-			res.message('E-mail adres of wachtwoord onjuist');
+		let returnInvalid = (message) =>	{
+			res.message(message);
 			
 			res.render('organization/login', {
 				layout : 'main',
 				csrfToken : req.csrfToken()
 			});
 		}
-
+		
+		if (!req.body.email || !req.body.password)
+			return returnInvalid('E-mail adres of wachtwoord onjuist');
+		
 		let org = await Organization.findOne({ email : req.body.email});
 		
 		if (!org)
-			return returnInvalid();
+			return returnInvalid('E-mail adres of wachtwoord onjuist');
 			
 		let compareResult = await org.comparePassword(req.body.password);
 		
 		if (compareResult != true)
-			return returnInvalid();
+			return returnInvalid('E-mail adres of wachtwoord onjuist');
 			
 		// set session
 		req.session.user = { 
@@ -273,192 +330,24 @@ const OrganizationController = {
 			size:10 });		
 		*/
 		
-		var PdfPrinter = require('pdfmake');
-		let fs = require('fs');
-		// Define font files
-		var fonts = {
-			Walsheim: {
-				normal : __dirname + '/../static/fonts/GT-Walsheim-Regular.ttf',
-				bold :  __dirname + '/../static/fonts/GT-Walsheim-Bold.ttf'
-			}
-		};		
+		let siteUrl = req.protocol + '://' + req.get('host');
 		
-		var printer = new PdfPrinter(fonts);
+		let PdfPrinter = require('pdfmake');
+		let template = require('../utils/pdftemplate.js');
+		let tpl = template(
+			siteUrl + '/check-in/' + req.session.user._id,
+			req.session.user.name
+		);	
 		
-		var docDefinition = {
-		  // a string or { width: number, height: number }
-		  pageSize: 'A4',
-
-		  // by default we use portrait, you can change it to landscape if you wish
-		  pageOrientation: 'portrait',
-
-		  // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-		  pageMargins: [ 40, 20, 40, 60 ],			
-			
-			background : [
-				{	image : __dirname + '/../static/img/pdf-background.png', width: 599 }
-			],
-
-		  info: {
-			title: 'Check-in met QR code',
-			author: 'Present - by Schluss',
-			subject: '',
-			keywords: '',
-		  },			
-					
-		  content: [
-		  
-			// logo image
-			{
-				svg:  fs.readFileSync(__dirname + '/../static/img/logo.svg', 'utf8'),
-				alignment : 'center',
-				width : 75
-			},	
-
-			// title
-			{ text: '\nLaat weten dat je er bent', bold: true, fontSize: 30, alignment : 'center' },
-
-			// text
-			{ text: '\nDeel je gegevens voor een mogelijk bron\n en contactonderzoek door de GGD\n\n\n\n', fontSize: 15, color : '#666666', alignment : 'center', height: 200 },
-			
-			// marker 
-			{ svg:  fs.readFileSync(__dirname + '/../static/img/marker.svg', 'utf8'), width : 15, alignment : 'center' },
-			
-			// organization name
-			{
-				width: '50%',
-				text : req.session.user.name,
-				bold: true, 
-				fontSize: 20, 
-				alignment : 'center'
-			},
-						
-			// spacer
-			{ text : '\n\n'},			
-
-			// check items
-			{			  
-				columns : [
+		let printer = new PdfPrinter(tpl.fonts);
 				
-					{ text : '', width: '22%' },
-					
-					{
-						width: '8%',
-						svg:  fs.readFileSync(__dirname + '/../static/img/check.svg', 'utf8'),
-						width : 18,
-					},
-
-					{ text : '', width: '1%' },					
-					
-					{
-						width : '20%',
-						text: 'Anoniem', fontSize: 15
-					},
-					
-					{
-						width: '8%',
-						svg:  fs.readFileSync(__dirname + '/../static/img/check.svg', 'utf8'),
-						width : 18
-					},	
-
-					{ text : '', width: '1%' },						
-					
-					{
-						width : '*',
-						text: 'Niet verplicht, wel lief', fontSize: 15
-					}			
-				
-				]
-				
-			},
-			{			  
-				columns : [
-				
-					{ text : '', width: '22%' },
-					
-					{
-						svg:  fs.readFileSync(__dirname + '/../static/img/check.svg', 'utf8'),
-						width : 18
-					},	
-
-					{ text : '', width: '1%' },						
-					
-					{
-						width : '20%',
-						text: 'Veilig', fontSize: 15
-					},
-					
-					{
-						svg:  fs.readFileSync(__dirname + '/../static/img/check.svg', 'utf8'),
-						width : 18
-					},	
-
-					{ text : '', width: '1%' },						
-					
-					{
-						width : '*',
-						text: 'Na 14 dagen vernietigd', fontSize: 15
-					}				
-				
-				]
-				
-			},	
-
-			{ text: '\n', fontSize: 20 },
-
-			// qr code
-			{ qr: 'http://localhost:3000/check-in/' + req.session.user._id, eccLevel : 'M', fit : 200, alignment: 'center' },
-		  
-			// spacer
-			{ text : '\n\n\n\n\n\n\n' },
-		  
-		  
-			// powered and secured by
-			{
-				columns : [
-			  
-					{ text : '', width: '35%' },
-					
-					{
-						svg:  fs.readFileSync(__dirname + '/../static/img/lock.svg', 'utf8'),
-						width : 10
-					},
-					
-					{ text : '', width: '1%' },					
-					
-					{
-						text : 'secured and powered by',
-						color : '#7e879c',
-						width: '18%',
-						fontSize: 8
-					},	
-
-					{
-						svg:  fs.readFileSync(__dirname + '/../static/img/schluss-logo.svg', 'utf8'),
-						width : 55
-					}					
-			  
-				] 
-		  }
-		  
-		  ],
-
-  			defaultStyle: {
-				font: 'Walsheim'
-			}
-		};
-
-		var options = {
-		  // ...
-		};
-		
-		var pdfDoc = printer.createPdfKitDocument(docDefinition, options);
+		let pdfDoc = printer.createPdfKitDocument(tpl.docDefinition, tpl.options);
 		
 		// send pdf to browser as download
 		res.setHeader('Content-Type', 'application/pdf');
 		res.setHeader('Content-Disposition', 'attachment; filename=QR-code.pdf');
 		pdfDoc.pipe(res);		
-		pdfDoc.end();
+		pdfDoc.end();	
 	},
 	
 	logout : function(req, res){

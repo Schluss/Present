@@ -1,57 +1,95 @@
 <script src="/js/openpgp.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/register.js"></script>
 
-
-{{> header }}
-
 <style>
 
 	#fieldset-hidden-form{
 		display: none;
 	}
 </style>
-	
-<div class="container center small">
 
-	<div class="row">
-
-		<h1>Handmatig invoeren</h1>
-
+<div class="row">
+	<div class="center col-12">
+	<h1>Handmatige check-in</h1>
 	</div>
+</div>
 
-	<div class="row">
+	
+<div class="row center">
+	<div class="col-1"></div>
+    <div class="col-10 center">
+
+       {{> message }}
 
 	<form id="mock-form">
-		<div class="form-group">
-			<label for="name-field" class="required">Naam</label>
-			<input type="text" class="form-control" id="name-field" required>
+	
+	<div class="row">
+		<div class="col-12">
+			<div class="form-group">
+				<label for="name-field" class="required">Naam</label>
+				<input type="text" class="form-control" id="name-field" required />
+			</div>
 		</div>
-		
-		<div class="form-group">
-			<label for="email-field" class="required">E-mail</label>
-			<input type="email" class="form-control" id="email-field" aria-describedby="emailHelp">
+	</div>
+			
+	<div class="row">
+		<div class="col-12">
+			<div class="form-group">
+				<label for="email-field" class="required">E-mail</label>
+				<input type="email" class="form-control" id="email-field" aria-describedby="emailHelp" />
+			</div>		
 		</div>		
+	</div>		
 
-		<div class="form-group">
-			<label for="mobile-field" class="required">Telefoonnummer</label>
-			<input type="text" class="form-control" id="mobile-field">
+	<div class="row">
+		<div class="col-12">
+			<div class="form-group">
+				<label for="mobile-field" class="required">Telefoonnummer</label>
+				<input type="text" class="form-control" id="mobile-field" />
+			</div>
 		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			<div class="form-group">
+				<label for="date-field" class="required">Datum</label>
+				<input type="date" class="form-control" name="checkinDate" id="date-field" value="{{{checkinDate}}}" required />
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group">
+				<label for="time-field" class="required">Tijd</label>
+				<input type="time" class="form-control" name="checkinTime" id="time-field" value="{{{checkinTime}}}" required />
+			</div>		
+		</div>		
+	</div>		
 	</form>
 	
-    <form id="form" method="post">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <input type="hidden" name="org" value="{{org._id}}">
-        <input type="hidden" name="data" id="data" value="">
-		<div class="form-group">
-			<button id="submit-button" type="button">Verstuur</button>	
-		</div>
-	</form>		
-	
-	<input type="hidden" id="pubkey" value="{{{pubkey.key}}}"/>
-	
 	</div>
+	<div class="col-1"></div>
+</div>	
 	
+<div class="row center">
+    <div class="col-12">        
+		<div class="form-group">
+		
+		<form id="form" method="post">
+			<input type="hidden" name="_csrf" value="{{csrfToken}}">
+			<input type="hidden" name="org" value="{{org._id}}">
+			<input type="hidden" name="data" id="data" value="">
+			<button id="submit-button" type="button">Opslaan</button>	
+		</form>		
+	
+		<input type="hidden" id="pubkey" value="{{{pubkey.key}}}"/>
+	
+		</div>
+		
+		<br/>
+		<p><a href="/account">Terug</a></p>		
+	</div>
 </div>
+
 
 
     

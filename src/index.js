@@ -79,7 +79,7 @@ const app = express();
 			app.use(session({
 				secret	: process.env.SESSION_SECRET, 
 				name 	: process.env.SESSION_NAME,
-				resave	: false, 
+				resave	: true, 
 				saveUninitialized: true,		// when this is false, sometimes you need to login multiple times...
 				cookie : { 
 					// https requirement for cookies always in production
