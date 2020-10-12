@@ -1,33 +1,37 @@
-{{> header }}
 
-<div class="container">
+
 
 <div class="row">
 	<div class="center col-12">
-	<h1>{{ org.name }}</h1>
-	<p>Aantal registraties vandaag: {{registrationCount}}</p>
+	<h1><img src="/img/marker.svg" width="15" alt="location"/> {{ org.name }}</h1>
+	<p class="regCount">{{registrationCount}}</p>
+	<p class="regText">registraties vandaag</p>
 	</div>
 </div>
 
-<div class="row center">
+<div class="row">
 	<div class="col-2"></div>
-    <div class="col-8 center">
+    <div class="col-8">
+
+
+
+	<ul class="mainmenu">
+		<li><a href="/account/manual-check-in"><img src="/img/add-manual.svg" /> Handmatige check-in</a></li>
+		<li><a href="/account/download-qr"><img src="/img/download-qr.svg" /> QR code downloaden/printen</a></li>
+		<li><a href="/account/mijn-gegevens"><img src="/img/my-data.svg" /> Mijn gegevens</a></li>
+	</ul>
 
 
 
 
-
-
-
-
-<p><a href="/account/manual-check-in">[+] Handmatige invoer</a></p>
+<!--
+<p></p>
 <p><a href="/check-in/{{org._id}}">[debug] Invoer voorkant</a></p>
 <p><a href="/account/download-qr">QR code downloaden</a></p>
 
 <p><a href="/account/mijn-gegevens">Mijn gegevens</a></p>
-<p><a href="/loguit">Uitloggen</a></p>
+-->
 
 	</div>
 	<div class="col-2"></div>
-</div>
 </div>

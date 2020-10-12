@@ -9,6 +9,11 @@ const Registration = new Schema({
 			type: Schema.Types.ObjectId,
 			ref : 'Organization'
 		},
+		
+		checkinDate : {
+			type : Date,
+			default: Date.now			
+		},
 	   
 		data: {
 			type: String,
@@ -21,6 +26,6 @@ const Registration = new Schema({
 	});
 
 // expire the document in 14 days (=1209600 seconds)
-Registration.index({createdAt: 1},{expireAfterSeconds: process.env.REGISTRATION_EXPIRATION});
+Registration.index({checkinDate: 1},{expireAfterSeconds: process.env.REGISTRATION_EXPIRATION});
 
 module.exports =  mongoose.model('Registration', Registration);

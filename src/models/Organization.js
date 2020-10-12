@@ -30,11 +30,29 @@ const Organization = new Schema({
 			unique: true
 		},
 
-		address : { 
+		streetname : { 
 			type: String,
-			required: [true, 'Adres'],
+			required: [true, 'Straatnaam'],
+			trim: true
+		},	
+
+		housenumber : { 
+			type: String,
+			required: [true, 'Huisnummer'],
+			trim: true
+		},	
+
+		postal : { 
+			type: String,
+			required: [true, 'Postcode'],
 			trim: true
 		},		
+		
+		city : { 
+			type: String,
+			required: [true, 'Plaats'],
+			trim: true
+		},
 		
 		email: {
 			type: String,
@@ -73,9 +91,7 @@ Organization.pre('save', async function (next) {
 });
 
 Organization.methods.comparePassword = async function (passw) {
-	
-	return await password.compare(passw, this.salt, this.hash);
-
+	return password.compare(passw, this.salt, this.hash);
 };	
 
 module.exports = mongoose.model('Organization', Organization);

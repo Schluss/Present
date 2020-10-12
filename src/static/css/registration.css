@@ -1,3 +1,35 @@
+.header {
+	position:relative;
+	height:5em;
+	padding-top:1em;
+	clear:both;
+	padding-bottom:1em;
+	
+	z-index:999;
+}
+
+.header .logo {
+	width:110px;
+	float:left;
+}
+
+.floatright {
+	float:right;
+}
+
+.location {
+	font-size:1em;
+}
+
+.location img {
+	width:18px;
+	margin-bottom:-2px;
+}
+
+.main {
+	padding-bottom: 50px;	
+}
+
 .container.small {
 	max-width:600px;
 	

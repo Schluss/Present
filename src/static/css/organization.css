@@ -1,0 +1,104 @@
+body{
+	background:#f7f7f9;
+	
+}
+
+.header .container{
+	padding-top:10px;
+}
+
+.header .logo{
+	
+}
+
+
+
+.header .logout a{
+	
+	color:#212A3D;
+	text-decoration:none;
+	font-size:16px;
+	line-height:16px;
+}
+
+.header .logout a img{
+	line-height:16px;
+	vertical-align:middle;
+	margin-top:-4px;
+}
+
+h1{
+	margin-bottom:43px;
+}
+
+.regCount {
+	font-family:'Walsheim-Bold';
+	line-height:1.077;
+	color:#212A3D;
+	font-size: 52px;
+	margin:0;
+}
+
+.regText
+{
+	color:#586071;
+	font-size: 17px;
+	line-height:1.412rem;
+	margin:0;
+	
+	margin-bottom:55px;
+}
+
+
+.main .container{
+	margin-top:80px;
+	
+	background:#fff;
+	
+	padding:47px;
+	
+	border-radius:12px;
+    -webkit-box-shadow: 0 23px 39px -24px rgba(0,0,0,.5);
+    box-shadow: 0 23px 39px -24px rgba(0,0,0,.5);
+	
+	max-width:760px;
+		
+}
+
+h1{
+	font-size:20px;
+	
+}
+
+.mainmenu {
+	list-style:none;
+	
+}
+
+.mainmenu li a img{
+	margin-right:30px;
+	display:inline-block;
+	vertical-align:middle;
+	line-height:19px;
+}
+
+.mainmenu li a{
+	display:block;
+	width:100%;
+	padding:18px;
+	color:#212A3D;
+	font-size:19px;
+	border:1px solid #DBDBDF;
+	border-radius:12px;
+	text-decoration:none;
+	line-height:19px;
+	
+	margin-bottom:22px;
+}
+
+.mainmenu li a:hover{
+	background:#fafafa;
+	color:#444;
+    -webkit-box-shadow: 0 23px 39px -24px rgba(0,0,0,.5);
+    box-shadow: 0 10px 12px -12px rgba(0,0,0,.2);	
+}

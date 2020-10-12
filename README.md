@@ -63,7 +63,7 @@ To fire up the development webserver run:
 > npm run servelocal
 
 
-## Security measures in place already:
+## Security measures in place:
 
 - organization passwords are hashed and salted using pkbdf2
 - user registrations client side encrypted using a 4096bit RSA key
@@ -77,6 +77,7 @@ To fire up the development webserver run:
 - frameguard: sets the X-Frame-Options header to provide clickjacking protection.
 - xssFilter: sets X-XSS-Protection to enable the Cross-site scripting (XSS) filter in most recent web browsers.
 - MongoDB connected via Client certificate
+- Session data encrypted for logged in organizations
 
 ## Todo's:
 - modify installkeys.js to pickup all keys available and not generate the keys anymore
@@ -90,6 +91,8 @@ To fire up the development webserver run:
 - secure way of private key distribution to organization (will be probably offline)
 - commandline tool / script to get registrations
 - totp (2 factor auth) at organization login
+- organization: change password
+- organization: reset forgotten password -> mailservices needed 
 
 Postponed:
 - admin portal

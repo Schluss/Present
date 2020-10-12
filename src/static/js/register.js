@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', async function(event) {
 			message: openpgp.message.fromText(messageText),
 			publicKeys: publicKey.keys,
 		});
-					
+		
+
+		
 		element('data').value = encrypted;
 		element('form').submit();
 	});

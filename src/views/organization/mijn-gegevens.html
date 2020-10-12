@@ -1,7 +1,3 @@
-{{> header }}
-
-<div class="container">
-
 <div class="row">
 	<div class="center col-12">
 	<h1>Mijn gegevens</h1>
@@ -9,67 +5,102 @@
 </div>
 
 <div class="row center">
-	<div class="col-2"></div>
-    <div class="col-8 center">
+	<div class="col-1"></div>
+    <div class="col-10 center">
 
-
-		
-
-		
-
-		<p>Wijzig je gegevens</p>
-
-       {{#if message}}
-            <div class="alert {{messageClass}}" role="alert">
-                {{message}}
-            </div>
-        {{/if}}
+       {{> message }}
 
         <form method="POST" action="">
 		<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-
+<div class="row">
+	<div class="col-12">
 		<div class="form-group">
 		<label for="name" class="required">Bedrijfsnaam</label>
 		<input name="name" type="text" class="form-control" id="name" value="{{org.name}}">
 		</div>
+	</div>
+</div>
 
+<div class="row">
+	<div class="col-12">
 		<div class="form-group">
             <label for="kvk" class="required">KVK nummer</label>
             <input name="kvk" type="text" class="form-control" id="kvk" value="{{org.kvk}}">
         </div>   
-    
-        <div class="form-group">
-			<label for="address" class="required">Adres</label>
-            <input name="address" type="text" class="form-control" id="address" value="{{org.address}}">
-        </div>
-            
-        <div class="form-group">
-			<label for="emailInput" class="required">Email adres</label>
-            <input name="email" type="email" class="form-control" id="emailInput" placeholder="" value="{{org.email}}">
-        </div>
+	</div>
+</div>
 
+<div class="row">
+	<div class="col-8">
+        <div class="form-group">
+			<label for="streetname" class="required">Straatnaam</label>
+            <input name="streetname" type="text" class="form-control" id="streetname" value="{{org.streetname}}" required />
+        </div>
+	</div>
+	
+	<div class="col-4">
+        <div class="form-group">
+			<label for="housenumber" class="required">Huisnummer</label>
+            <input name="housenumber" type="text" class="form-control" id="housenumber" value="{{org.housenumber}}" required />
+        </div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-4">
+        <div class="form-group">
+			<label for="postal" class="required">Postcode</label>
+            <input name="postal" type="text" class="form-control" id="postal" value="{{org.postal}}" required />
+        </div>
+	</div>
+	
+	<div class="col-8">
+        <div class="form-group">
+			<label for="city" class="required">Plaats</label>
+            <input name="city" type="text" class="form-control" id="city" value="{{org.city}}" required />
+        </div>
+	</div>
+</div>
+
+<div class="row"> 
+	<div class="col-12">
+        <div class="form-group">
+			<label for="emailInput" class="required">E-mail adres</label>
+            <input name="email" type="email" class="form-control" id="emailInput" value="{{org.email}}" required />
+        </div>
+       </div>
+</div>
+
+<div class="row">
+	<div class="col-12">
         <div class="form-group">
 			<label for="passwordInput" class="required">Wachtwoord</label>
-            <input name="password" type="password" class="form-control" id="passwordInput" placeholder="">
+            <input name="password" type="password" class="form-control" id="passwordInput" />
         </div>
+    </div>
+</div>
 
-            
+<div class="row">
+    <div class="col-12">        
 		<div class="form-group">
 			<label for="confirmPasswordInput" class="required">Herhaal wachtwoord</label>
-            <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" placeholder="">
+            <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" />
         </div>   
+    </div>   
+</div>
 
-
-		<div class="center">
+<div class="row">
+    <div class="col-12">        
+		<div class="form-group">
 			<button type="submit" class="btn btn-primary">Opslaan</button>
-		</div>
-		
+        </div>   
+    </div>   
+</div>
         </form>
 		
-		<br/><a href="/account">Terug</a>
-
+		<a href="/account">Terug</a>
+		<br/><br/>
 	</div>
-	<div class="col-2"></div>
-</div>
+	<div class="col-1"></div>
 </div>
