@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # For now: manualy copy certificate
-COPY mongocert.pem ./
+#COPY mongocert.pem ./
 
 #RUN npm install
 # If you are building your code for production
