@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{title}} - Present</title>
+    <title>{{#if title}}{{title}} -{{/if}} Present</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/ico" href="/favicon.ico">
     <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/registration.css">
+    <link rel="stylesheet" href="/css/organization.css">
 </head>
 <body>
 
 <div class="wrapper">
 
-    {{#if header}}
-		{{{header}}}
-	{{/if}}
+<div class="header">
+	<div class="container small">
+		<div class="row">
+			{{#if org.name}}
+			<div class="col-6 logo">
+				<img src="/img/logo.svg" width="120" alt="logo"/>
+			</div>			
+			
+			<div class="col-6 logout right">
+				<a href="/loguit"><img src="/img/logout.png" alt="location"/> Uitloggen</a>
+			</div>
+			{{ else }}
+			<div class="center">
+				<img src="/img/logo.svg" class="" alt="logo"/>
+			</div>
+			{{/if}}
+		</div>
+	</div>
+</div>
 	
 <div class="main">
+	<div class="container">
     {{{body}}}
+	</div>
 </div>
 
 	{{> footer }}

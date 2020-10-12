@@ -11,7 +11,6 @@ const helmet = require("helmet");
 const message = require('./utils/onetimemessage');
 const migrations = require('./utils/migrations');
 const minifyHTML = require('express-minify-html-2');
-const https = require('https');
 const db = require('./utils/db');
 const MongoStore = require('connect-mongo')(session);
 const mongoSanitize = require('express-mongo-sanitize');
@@ -61,14 +60,6 @@ const app = express();
 // connect static assets 
 	app.use(express.static(path.join(__dirname, 'static')));
 
-// create https server
-	let credentials = {
-	  key: fs.readFileSync(process.env.HTTPS_KEY),
-	  cert: fs.readFileSync(process.env.HTTPS_CERT)
-	};
-	let httpsServer = https.createServer(credentials, app);
-
-
 // RUN LOGIC -----------------------------------
 
 // connect to db
@@ -88,10 +79,11 @@ const app = express();
 			app.use(session({
 				secret	: process.env.SESSION_SECRET, 
 				name 	: process.env.SESSION_NAME,
-				resave	: false, 
-				saveUninitialized: false,
+				resave	: true, 
+				saveUninitialized: true,		// when this is false, sometimes you need to login multiple times...
 				cookie : { 
-					secure 	: true,
+					// https requirement for cookies always in production
+					secure 	: process.env.NODE_ENV == 'production' ? true : false, 			
 					expires : expiryDate,
 					httpOnly: true,
 					path 	: '/',
@@ -99,7 +91,7 @@ const app = express();
 				// store sessions in db
 				store: new MongoStore({ 
 					mongooseConnection: db.connection(),
-					//secret: 'mySecret'
+					secret: process.env.SESSION_SECRET,
 				})
 			}));
 				
@@ -111,10 +103,11 @@ const app = express();
 			
 		// todo: add middleware to be able to log errors	
 			
-		// fire up https server
-			httpsServer.listen(process.env.PORT, () => {
-				console.log('Server started on ' + process.env.PORT);
-			});
+		// fire up http server
+		app.listen(process.env.PORT, () => { 
+			console.log('Server started on ' + process.env.PORT)
+		});
+
 	})
 	
 	// or if something did go wrong...
