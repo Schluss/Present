@@ -7,7 +7,7 @@ const RegisterModel = require('../models/Registration');
 
 const RegisterController = {
 
-	requireCSRF : csrf(),
+	requireCSRF : csrf({ cookie: true }),
 
 	// returns the number of registrations for an organization in total
 	getCount : async(orgId)  =>  {

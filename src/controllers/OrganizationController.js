@@ -18,7 +18,7 @@ const formatError = errors => {
 	
 const OrganizationController = {
 
-	requireCSRF : csrf(),
+	requireCSRF : csrf({ cookie: true }),
 
 	requireAuth : (req, res, next) => {
 
