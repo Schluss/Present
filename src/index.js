@@ -38,7 +38,7 @@ const app = express();
 	app.use(mongoSanitize());
 
 // parse cookies from HTTP Requests
-	app.use(cookieParser());
+	app.use(cookieParser(process.env.SESSION_SECRET));
 
 // secure against different types of attacks
 	app.use(helmet());
@@ -74,17 +74,20 @@ const app = express();
 	.then(() => {	
 
 		// enable sessions
-		let expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+		//let expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 		app.set('trust proxy', 1) // trust first proxy
 			app.use(session({
 				secret	: process.env.SESSION_SECRET, 
 				name 	: process.env.SESSION_NAME,
+				rolling: true,
 				resave	: true, 
 				saveUninitialized: true,		// when this is false, sometimes you need to login multiple times...
+				unset: 'destroy',
 				cookie : { 
 					// https requirement for cookies always in production
-					secure 	: process.env.NODE_ENV == 'production' ? true : false, 			
-					expires : expiryDate,
+					secure 	: process.env.NODE_ENV == 'production' ? true : false, 
+					sameSite: true,
+					maxAge : 28800000, // = miliseconds =  8hr
 					httpOnly: true,
 					path 	: '/',
 				},
