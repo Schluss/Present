@@ -10,14 +10,14 @@
 
        {{> message }}
 
-        <form method="POST" action="">
+        <form method="POST" action="" autocomplete="nope">
 		<input type="hidden" name="_csrf" value="{{csrfToken}}">
 
 <div class="row">
 	<div class="col-12">
 		<div class="form-group">
 		<label for="name" class="required">Bedrijfsnaam</label>
-		<input name="name" type="text" class="form-control" id="name" value="{{org.name}}">
+		<input name="name" type="text" class="form-control" id="name" autocomplete="nope" value="{{org.name}}">
 		</div>
 	</div>
 </div>
@@ -26,7 +26,7 @@
 	<div class="col-12">
 		<div class="form-group">
             <label for="kvk" class="required">KVK nummer</label>
-            <input name="kvk" type="text" class="form-control" id="kvk" value="{{org.kvk}}">
+            <input name="kvk" type="text" class="form-control" id="kvk" autocomplete="nope" value="{{org.kvk}}">
         </div>   
 	</div>
 </div>
@@ -35,14 +35,14 @@
 	<div class="col-8">
         <div class="form-group">
 			<label for="streetname" class="required">Straatnaam</label>
-            <input name="streetname" type="text" class="form-control" id="streetname" value="{{org.streetname}}" required />
+            <input name="streetname" type="text" class="form-control" id="streetname" autocomplete="nope" value="{{org.streetname}}" required />
         </div>
 	</div>
 	
 	<div class="col-4">
         <div class="form-group">
 			<label for="housenumber" class="required">Huisnummer</label>
-            <input name="housenumber" type="text" class="form-control" id="housenumber" value="{{org.housenumber}}" required />
+            <input name="housenumber" type="text" class="form-control" id="housenumber" autocomplete="nope" value="{{org.housenumber}}" required />
         </div>
 	</div>
 </div>
@@ -51,14 +51,14 @@
 	<div class="col-4">
         <div class="form-group">
 			<label for="postal" class="required">Postcode</label>
-            <input name="postal" type="text" class="form-control" id="postal" value="{{org.postal}}" required />
+            <input name="postal" type="text" class="form-control" id="postal" autocomplete="nope" value="{{org.postal}}" required />
         </div>
 	</div>
 	
 	<div class="col-8">
         <div class="form-group">
 			<label for="city" class="required">Plaats</label>
-            <input name="city" type="text" class="form-control" id="city" value="{{org.city}}" required />
+            <input name="city" type="text" class="form-control" id="city" autocomplete="nope" value="{{org.city}}" required />
         </div>
 	</div>
 </div>
@@ -67,7 +67,7 @@
 	<div class="col-12">
         <div class="form-group">
 			<label for="emailInput" class="required">E-mail adres</label>
-            <input name="email" type="email" class="form-control" id="emailInput" value="{{org.email}}" required />
+            <input name="email" type="email" class="form-control" id="emailInput" autocomplete="nope" value="{{org.email}}" required />
         </div>
        </div>
 </div>
@@ -76,7 +76,7 @@
 	<div class="col-12">
         <div class="form-group">
 			<label for="passwordInput" class="required">Wachtwoord</label>
-            <input name="password" type="password" class="form-control" id="passwordInput" />
+            <input name="password" type="password" class="form-control" autocomplete="nope" id="passwordInput" />
         </div>
     </div>
 </div>
@@ -85,7 +85,7 @@
     <div class="col-12">        
 		<div class="form-group">
 			<label for="confirmPasswordInput" class="required">Herhaal wachtwoord</label>
-            <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput" />
+            <input name="confirmPassword" type="password" class="form-control" autocomplete="nope" id="confirmPasswordInput" />
         </div>   
     </div>   
 </div>

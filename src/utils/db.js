@@ -2,7 +2,12 @@
 
 const fs = require('fs');
 const mongoose = require('mongoose');
-const certFile = fs.readFileSync(process.env.DB_CERTIFICATE);
+
+// Process certificate string
+// to be able to support all kinds of .env setups, newlines need to be replaced with ||
+// this script will then convert || back to \n
+let certString = process.env.DB_CERTIFICATE;
+certString = certString.split("||").join("\n");
 
 module.exports = {
 	
@@ -13,7 +18,7 @@ module.exports = {
 		  useUnifiedTopology: true,
 		  useFindAndModify: false,
 		  useCreateIndex: true,
-		  sslCA: certFile,
+		  sslCA: certString,
 		  sslValidate: true 
 		});
 	},

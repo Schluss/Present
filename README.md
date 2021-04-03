@@ -92,7 +92,8 @@ To fire up the development webserver run:
 - commandline tool / script to get registrations
 - totp (2 factor auth) at organization login
 - organization: change password
-- organization: reset forgotten password -> mailservices needed 
+- organization: reset forgotten password -> mailservices needed
+- organization: manual check-in: input type=date / type=time not supported on safari browser: need to create a polyfill 
 
 Postponed:
 - admin portal

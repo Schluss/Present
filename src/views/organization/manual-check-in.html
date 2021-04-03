@@ -21,13 +21,13 @@
 
        {{> message }}
 
-	<form id="mock-form">
+	<form id="mock-form" autocomplete="nope">
 	
 	<div class="row">
 		<div class="col-12">
 			<div class="form-group">
 				<label for="name-field" class="required">Naam</label>
-				<input type="text" class="form-control" id="name-field" required />
+				<input type="text" class="form-control" id="name-field" autocomplete="nope" required />
 			</div>
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 		<div class="col-12">
 			<div class="form-group">
 				<label for="email-field" class="required">E-mail</label>
-				<input type="email" class="form-control" id="email-field" aria-describedby="emailHelp" />
+				<input type="email" class="form-control" id="email-field" autocomplete="nope" />
 			</div>		
 		</div>		
 	</div>		
@@ -45,7 +45,7 @@
 		<div class="col-12">
 			<div class="form-group">
 				<label for="mobile-field" class="required">Telefoonnummer</label>
-				<input type="text" class="form-control" id="mobile-field" />
+				<input type="text" class="form-control" id="mobile-field" autocomplete="nope" />
 			</div>
 		</div>
 	</div>
@@ -54,13 +54,13 @@
 		<div class="col-6">
 			<div class="form-group">
 				<label for="date-field" class="required">Datum</label>
-				<input type="date" class="form-control" name="checkinDate" id="date-field" value="{{{checkinDate}}}" required />
+				<input type="date" class="form-control" name="checkinDate" id="date-field" autocomplete="nope" value="{{{checkinDate}}}" required />
 			</div>
 		</div>
 		<div class="col-6">
 			<div class="form-group">
 				<label for="time-field" class="required">Tijd</label>
-				<input type="time" class="form-control" name="checkinTime" id="time-field" value="{{{checkinTime}}}" required />
+				<input type="time" class="form-control" name="checkinTime" id="time-field" autocomplete="nope" value="{{{checkinTime}}}" required />
 			</div>		
 		</div>		
 	</div>		

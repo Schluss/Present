@@ -18,7 +18,7 @@ const formatError = errors => {
 	
 const OrganizationController = {
 
-	requireCSRF : csrf(),
+	requireCSRF : csrf({ cookie: true }),
 
 	requireAuth : (req, res, next) => {
 
@@ -350,9 +350,9 @@ const OrganizationController = {
 		pdfDoc.end();	
 	},
 	
-	logout : function(req, res){
+	logout : async function(req, res){
 	  if (req.session) {
-		req.session.destroy();
+		await req.session.destroy();
 		res.clearCookie(process.env.SESSION_NAME);
 		res.clearCookie('_csrf');
 		res.redirect('/');
